@@ -215,8 +215,7 @@ body{
 /* Animation */
 .anim-typewriter{
   animation: typewriter 1.25s steps(8) 0.5s 1 normal both,
-             blinkTextCursor 500ms steps(8) infinite normal, zero 0s ease-out 2s;
-  animation-fill-mode: both;
+             blinkTextCursor 500ms steps(8) infinite normal;
 }
 @keyframes typewriter{
   from{width: 0;}
