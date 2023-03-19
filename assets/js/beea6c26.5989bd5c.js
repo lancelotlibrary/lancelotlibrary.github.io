@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_drayman_docs=self.webpackChunk_drayman_docs||[]).push([[4170],{3576:a=>{a.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"javascript","name":"javascript","count":1,"permalink":"/blog/tags/javascript"}')}}]);
