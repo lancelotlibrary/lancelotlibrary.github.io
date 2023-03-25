@@ -1,6 +1,5 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
-import {ReactComponent as myLogo} from './mylogo.svg';
 
 const config: DocsThemeConfig = {
 logo: (
