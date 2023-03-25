@@ -1,7 +1,7 @@
 {
-  "name": "nextra-docs-template",
+  "name": "lancelot",
   "version": "0.0.1",
-  "description": "Nextra docs template",
+  "description": "LANCELOT library",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+    "url": "git+https://github.com/lancelotlibrary/lancelotlibrary.github.io.git"
   },
-  "author": "Shu Ding <g@shud.in>",
+  "author": "Oleksii Sokoliuk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
+    "url": "https://github.com/lancelotlibrary/lancelotlibrary.github.io/issues"
   },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://github.com/lancelotlibrary/lancelotlibrary.github.io#readme",
   "dependencies": {
     "next": "^13.0.6",
     "nextra": "latest",

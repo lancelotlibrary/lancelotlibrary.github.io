@@ -1,0 +1,94 @@
+---
+title: Markov Chain Monte Carlo
+sidebar_position: 1
+---
+In order to perform the N-body simulations for modified cosmologies, we firstly need to constrain every single one of them with the use of various cosmological datasets to determine observables like $\Omega_{m0}$ or $H_0$ and derive the Hubble rate as well as effective gravitational constant $G_{\rm eff}$. In our case, we have used Observational Hubble Data (OHD), Supernovae type-Ia distance modulus, Baryon Acoustic Oscillations (BAO) and Cosmic Microwave Background (CMB) datasets to constrain our models. We provide those datasets in a form of a table below. 
+
+The first dataset is OHD one:
+
+| $z$  | $H(z)$   | $\sigma^2_H$ | $z$  | $H(z)$   | $\sigma^2_H$  | $z$  | $H(z)$ | $\sigma^2_H$ |
+|:--------:|:------:|:------:|:--------:|:------:|:------:|:--------:|:-------:|:------:|
+| $0.070$  | $69$   | $19.6$ | $0.3802$ | $83$   | $13.5$ | $0.8754$ | $125$   | $17$   |
+| $0.090$  | $69$   | $12$   | $0.400$  | $95$   | $17$   | $0.880$  | $90$    | $40$   |
+| $0.120$  | $68.6$ | $26.2$ | $0.4004$ | $77$   | $10.2$ | $0.900$  | $117$   | $23$   |
+| $0.170$  | $83$   | $8$    | $0.4247$ | $87.1$ | $11.2$ | $1.037$  | $154$   | $20$   |
+| $0.1791$ | $75$   | $4$    | $0.4497$ | $92.8$ | $12.9$ | $1.300$  | $168$   | $17$   |
+| $0.1993$ | $75$   | $5$    | $0.4783$ | $80$   | $99$   | $1.363$  | $160$   | $33.6$ |
+| $0.200$  | $72.9$ | $29.6$ | $0.480$  | $97$   | $62$   | $1.430$  | $177$   | $18$   |
+| $0.270$  | $77$   | $14$   | $0.593$  | $104$  | $13$   | $1.530$  | $140$   | $14$   |
+| $0.280$  | $88.8$ | $36.6$ | $0.6797$ | $92$   | $8$    | $1.750$  | $202$   | $40$   |
+| $0.3519$ | $83$   | $14$   | $0.7812$ | $105$  | $12$   | $1.965$  | $186.5$ | $50.4$ |
+
+And the second one refers to BAO:
+
+| $z_{BAO}$                     | $0.106$          | $0.2$            | 0.35             | $0.44$          | $0.6$           | $0.73$          |
+|-------------------------------|------------------|------------------|------------------|-----------------|-----------------|-----------------|
+| $\frac{d_{A}(z_*)}{D_{v}(z)}$ | $30.95 \pm 1.46$ | $17.55 \pm 0.60$ | $10.11 \pm 0.37$ | $8.44 \pm 0.67$ | $6.69 \pm 0.33$ | $5.45 \pm 0.31$ |
+
+MCMC methodology usually tries to obtain a best fit for theoretical predictions of distance modulus, $H(z)$ by varying the values of input parameters within a given range. As a MCMC sample we have chosen the widely known one, namely [emcee](https://emcee.readthedocs.io/en/stable/). Furtherly, we are going to discuss the results of such MCMC sampling for each modified gravity/neutrino case.
+
+### Constraints for regular MOGs
+First kind of modified theory of gravitation that we consider within the current project is modified symmetric teleparallel gravitation (or simply STEGR) with $f(Q)=Qe^{\lambda Q_0/Q}$, where $\lambda$ is a free model parameter and $Q_0=6H_0^2$. Second one is teleparallel gravitation, namely TEGR with $f(T)=T+\alpha T (1-e^{pT_0/T}-\sqrt{T_0/pT}\ln\left(T_0/T\right))$. We also include Non-Minimally Coupled versions of both theories with $f_1(Q)=Q+\alpha Q^2$, $f_2(Q)=1+\beta Q$ and $f_1(T)=T$, $f_2(T)=1+\lambda(T/T_0)^b$ respectively. The last model is Palatini-$f(R)$ gravitation, for which we have chosen the following functional form: $f(R)=R-2\Lambda/(\mu^2/R+1)$. We show the constraints for cosmological parameters $\Omega_{m0}$, $H_0$, $w_b$ and $M_B$ on the table below for each MOG of our consideration.
+
+
+| Model         | Parameter        | Posteriors   | OHD+SNa+BAO     | OHD+SNa+BAO+CMB    |
+|-------------------------|---------------|--------------|-----------------------------|-------------------------------|
+| $f(Q)$ gravity          | $H_0$         | [50,80]   | $70.62^{+0.95}_{-0.96}$     | $71.01^{+0.42}_{-0.43}$    |
+|                         | $\Omega_{m0}$ | [0.2,0.5] | $0.338\pm0.013$             | $0.290\pm 0.005$           |
+|                         | $\omega_b$    | [0.0,0.1] | $0.02234\pm0.00016$         | $0.02220\pm 0.0001$        |
+|                         | $M$           | [-25,0.0] | $-19.349\pm0.03$            | $-19.360\pm 0.011$         |
+| NMC-$f(Q)$ gravity            | $p$           | [-0.1,-4] | $-2.80^{+0.26}_{-0.30}$     | $-2.06^{+0.19}_{-0.23}$    |
+|           | $H_0$         | [50,80]   | $69.75^{+1.49}_{-1.47}$     | $69.45^{+0.963}_{-0.919}$  |
+|                         | $\Omega_{m0}$ | [0,1]     | $0.35^{+0.014}_{-0.013}$    | $0.311\pm 0.0083$          |
+|                         | $\omega_b$    | [0.0,0.1] | $0.02235\pm 0.00016$        | $0.02205\pm 0.0001$        |
+|                         | $M$           | [-25,0.0] | $-19.339\pm 0.041$          | $-19.323\pm 0.017$         |
+| $f(T)$ gravity          | $p$           | [0,1.5]   | $0.887\pm0.1$               | $0.926^{+0.054}_{-0.055}$  |
+|                         | $H_0$         | [50,80]   | $68.43^{+1.57}_{-1.59}$     | $67.24\pm0.84$             |
+|                         | $\Omega_{m0}$ | [0.2,0.5] | $0.324\pm0.014              | $0.316\pm 0.008$           |
+|                         | $\omega_b$    | [0.0,0.1] | $0.02236\pm0.00016$         | $0.0224\pm 0.00011$        |
+|                         | $M$           | [-25,0.0] | $-19.410^{+0.043}_{-0.045}$ | $-19.455\pm 0.018$         |
+| NMC-$f(T)$ gravity      | $p$           | [-5,0]    | $-2.58^{+0.267}_{-0.303}$   | $-1.80^{+0.122}_{-0.128}$ |
+|           | $H_0$         | [50,80]   | $69.29^{+1.5}_{-1.55}$     | $66.93^{+0.832}_{-0.842}$  |
+|                         | $\Omega_{m0}$ | [0.2,0.5] | $0.344\pm 0.015$            | $0.325\pm 0.008$           |
+|                         | $\omega_b$    | [0.0,0.1] | $0.02235\pm 0.00016$        | $0.02227\pm 0.0001$        |
+|                         | $M$           | [-25,0.0] | $-19.361^{+0.041}_{-0.045}$ | $-19.408\pm 0.02$          |
+| Palatini-$f(R)$ gravity | $c_2$         | [-5,0]    | $-1.31^{+0.771}_{-1.092}$   | $-1.93^{+0.789}_{-0.722}$  |
+|                         | $H_0$         | [50,80]   | $67.71^{+1.23}_{-1.05}$    | $67.74^{+0.43}_{-0.4}$     |
+|                         | $\Omega_{m0}$ | [0.2,0.5] | $0.329^{+0.015}_{-0.014}$   | $0.314\pm 0.0053$          |
+|                         | $\omega_b$    | [0.0,0.1] | $0.02237\pm 0.00016$        | $0.02233\pm 0.0001$        |
+|                         | $M$           | [-25,0.0] | $-19.416^{+0.038}_{-0.035}$ | $-19.419\pm 0.011$         |
+
+### Massive neutrino constraints
+As we previously mentioned, apart from the regular case described in the subsection above, we also added massive neutrino species to our MOG models. This can be done by adding non-relativistic neutrino energy density to the total $\rho_{\rm m}$:
+$$
+    \rho_{\mathrm{m}} = \rho_{\mathrm{b}}+\rho_{\mathrm{c}}+\rho_{\mathrm{r}}+\rho_\nu
+$$
+Because of the fact that new species appear, we have also new contribution to the total mass density of the universe:
+$$
+    \Omega_\nu \approx \frac{m_\nu}{93.14 h^2 \mathrm{\;eV}}, \quad m_\nu = \sum_i m_{\nu_i}
+$$
+Constraints for all of the aforementioned cosmological parameters plus neutrino mass and effective number of neutrino species $N_{\rm eff}$ are placed on the table below as usual.
+
+
+| Model          | Parameter          | Posterior | OHD+SNa+BAO+CMB                 | Model               | Parameter          | Posterior | OHD+SNa+BAO+CMB                 |
+|----------------|--------------------|-----------|---------------------------------|---------------------|--------------------|-----------|---------------------------------|
+| $\nu f(Q)$     | $H_0$              | [50,80]   | $69.8\pm 0.98$                  | NMC-$\nu f(T)$      | $p$                | [-5,0]    | $-2.33^{+0.22}_{-0.245}$        |
+|                | $\Omega_{m0}$      | [0.2,0.5] | $0.3136\pm 0.0081$              |                     | $H_0$              | [50,80]   | $69.21^{+1.16}_{-1.18}$         |
+|                | $\omega_b$         | [0.0,0.1] | $0.0222^{+0.00013}_{-0.00012}$  |                     | $\Omega_{m0}$      | [0.2,0.5] | $0.3321\pm 0.0085$              |
+|                | $M$                | [-25,0.0] | $-19.387\pm 0.029$              |                     | $\omega_b$         | [0.0,0.1] | $0.02215^{+0.00012}_{-0.00013}$ |
+|                | $\sum m_\nu$       | [0.0,1.0] | $0.642\pm 0.174$                |                     | $M$                | [-25,0.0] | $-19.389^{+0.031}_{-0.032}$     |
+|                | $N_{\mathrm{eff}}$ | [2.0,5.0] | $3.13\pm 0.174$                 |                     | $\sum m_\nu$       | [0.0,1.0] | $0.8^{+0.18}_{-0.16}$           |
+| NMC-$\nu f(Q)$ | $p$                | [-0.1,4]  | $-2.613^{+0.232}_{-0.263}$      |                     | $N_{\mathrm{eff}}$ | [2.0,5.0] | $3.08\pm 0.18$                  |
+|                | $H_0$              | [50,80]   | $68.57^{+1.18}_{-1.96}$         | Palatini-$\nu f(R)$ | $c_2$              | [-5,5]    | $-1.6^{+0.841}_{-0.948}$        |
+|                | $\Omega_{m0}$      | [0.2,0.5] | $0.3380\pm 0.0090$              |                     | $H_0$              | [50,80]   | $67.9^{+0.97}_{-0.96}$          |
+|                | $\omega_b$         | [0.0,0.1] | $0.02207^{+0.00014}_{-0.00013}$ |                     | $\Omega_{m0}$      | [0.2,0.5] | $0.3222\pm 0.0083$              |
+|                | $M$                | [-25,0.0] | $-19.372\pm 0.033$              |                     | $\omega_b$         | [0.0,0.1] | $0.02227\pm 0.00013$            |
+|                | $\sum m_\nu$       | [0.0,1.0] | $1.11\pm 0.15$                  |                     | $M$                | [-25,0.0] | $-19.412\pm 0.029$              |
+|                | $N_{\mathrm{eff}}$ | [2.0,5.0] | $3.04\pm 0.183$                 |                     | $\sum m_\nu$       | [0.0,1.0] | $0.355^{+0.151}_{-0.144}$       |
+| $\nu f(T)$     | $p$                | [0,1.5]   | $0.9^{+0.066}_{-0.065}$         |                     | $N_{\mathrm{eff}}$ | [2.0,5.0] | $3.154^{+0.177}_{-0.174}$       |
+|                | $H_0$              | [50,80]   | $68.0\pm 1.11$                  |                     |                    |           |                                 |
+|                | $\Omega_{m0}$      | [0.2,0.5] | $0.3154\pm 0.0083$              |                     |                    |           |                                 |
+|                | $\omega_b$         | [0.0,0.1] | $0.02236^{0.00014}_{0.00013}$   |                     |                    |           |                                 |
+|                | $M$                | [-25,0.0] | $-19.43^{+0.03}_{-0.0294}$      |                     |                    |           |                                 |
+|                | $\sum m_\nu$       | [0.0,1.0] | $0.132^{+0.141}_{-0.093}$       |                     |                    |           |                                 |
+|                | $N_{\mathrm{eff}}$ | [2.0,5.0] | $3.24^{+0.172}_{-0.174}$        |                     |                    |           |                                 |

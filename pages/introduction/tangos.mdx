@@ -1,0 +1,18 @@
+---
+title: Tangos databases
+sidebar_position: 3
+---
+
+For some cases, it is very handful to turn our halo catalogues and N-body simulation snapshots into a SQL database for further analysis. For such purpose, one may use the well-known [tangos](https://pynbody.github.io/tangos/) python library. Here we are going to describe the process of creation of such database in details. Firstly, one should obviously install `tangos` and set up variables `TANGOS_SIMULATION_FOLDER`, `TANGOS_DB_CONNECTION` in user's `.bashrc` file or CLI. Variable `TANGOS_SIMULATION_FOLDER` contain the path to the folder with simulation snapshots, while `TANGOS_DB_CONNECTION` is the path to the database to be analysed with file extension `.db` or `.sql`. Our team uses SQLite, but there are ways to use PostgreSQL, MySQL or MariaDB (see [tangos documentation](https://pynbody.github.io/tangos/index.html) for more details on the subject). Since for LANCELOT we only used [ROCKSTAR](https://bitbucket.org/gfcstanford/rockstar) halo finder, we will discuss the procedures for that case only. To start, firstly it is needed to import the database:
+```shell
+tangos add snapshot_xxx --min-particles N
+```
+Where `xxx` refers to the snapshot number and `N` to the minimal number of particles within a single DM halo. Consequently, one can also import various halo parameters, exported from the `ROCKSTAR` halo catalogues:
+```shell
+tangos import-properties Mvir Rvir X Y Z --for snapshot_xxx
+```
+And merger-trees:
+```shell
+tangos import-consistent-trees --for snapshot_xxx
+```
+Now it is possible to compute wide variety of quantities, like DM halo profiles, virial radii and mass etc. (for more detailed information, refer to [tutorial](https://pynbody.github.io/tangos/custom_properties.html))

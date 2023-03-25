@@ -1,7 +1,9 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": "About this library",
+  "introduction": "Introduction",
+  "Constraining_MOGs": "Constraining MOGs",
+  "simulations": "Simulations",
+  "post-processing": "Post-Processing",
   "about": {
     "title": "About",
     "type": "page"

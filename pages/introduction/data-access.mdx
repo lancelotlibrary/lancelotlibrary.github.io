@@ -1,0 +1,38 @@
+---
+title: Data Access
+sidebar_position: 2
+---
+LANCELOT library containts terabytes of data of various kinds, ranging from parameter files for GADGET-2 code up to binary files that contain all particle data (ID, coordinates, mass etc.). Due to such high weight of the data, we must distribute it evenly between several servers, one of which is located at Main Astronomical Observatory, Ukraine and the other one at Birla Institute of Technology and Science, Pilani, Hyderabad. That means that data can be accessed only partially from each server and therefore download rates may vary from time to time, taking into account the situation in Ukraine right now. 
+
+Here we are going to present the possible ways to access the simulation data and it's post-processing products. The first, easiest way is to use JupyterHub remote interface and analyse data without downloading it by connecting to the server via SSH protocol:
+```shell
+ssh -NfL localhost:9999:localhost:9999 your_user_name@remote_ip_address
+```
+The other way is to use [binder](https://mybinder.org/) to access the data on our servers. Our binder can be accessed via the link:
+
+For the sake of completeness, we have included many python libraries, that binder users may work with, for example:
+- `numpy 1.24.2`
+- `scipy 1.9.2`
+- `matplotlib 3.7.1`
+- `pylians3 0.7`
+- `h5py 3.8.0`
+- `astropy 5.1`
+- `yt-project 4.1.4 `
+
+Other packages may be installed on demand, please write enquires to oleksii.sokoliuk@mao.kiev.ua.
+
+## `curl` link generator
+
+One can also easily download the data directly from one of our servers using the `curl` command builder, described below. It is also worth to notice that for our simulations, we have a range of snapshots with $z$ span of:
+$$
+    \log_{10}(1+z_N) =\frac{N(N+35)}{4200},  \quad (0\leq N \leq 64)
+$$
+Finally, the sliders and final `curl` command are located below:
+
+```shell
+curl -v
+```
+Please toggle files that you want to be included into the download command and choose the needed redshift (`curl` will download snapshot/PP data for the nearest redshift in relation to the provided value)
+
+Furtherly, we are going to discuss how one can use [tangos](https://pynbody.github.io/tangos/) database manager to wrap particle data and halo catalogues together into one SQL database.
+
